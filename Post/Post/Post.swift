@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Post {
+struct Post: Codable {
     
     init(username: String, text: String, timestamp: TimeInterval = Date().timeIntervalSince1970) {
         
