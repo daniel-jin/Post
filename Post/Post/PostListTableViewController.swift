@@ -16,7 +16,19 @@ class PostListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        postController.fetchPosts {
+            self.reloadTableView()
+        }
 
+    }
+    
+    func reloadTableView() {
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            // Turn off activity spinner?
+        }
+        
     }
 
     
