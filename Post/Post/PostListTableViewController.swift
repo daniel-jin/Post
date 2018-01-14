@@ -13,6 +13,22 @@ class PostListTableViewController: UITableViewController {
     // MARK: - Properties
     var postController = PostController()
 
+    
+    // MARK: - IBActions
+    
+    @IBAction func refreshControlPulled(_ sender: UIRefreshControl) {
+        
+        postController.fetchPosts {
+            self.reloadTableView()
+            
+            DispatchQueue.main.async {
+                sender.endRefreshing()
+            }
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
