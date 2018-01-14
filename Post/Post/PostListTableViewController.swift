@@ -18,7 +18,10 @@ class PostListTableViewController: UITableViewController {
     
     @IBAction func refreshControlPulled(_ sender: UIRefreshControl) {
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         postController.fetchPosts {
+            
             self.reloadTableView()
             
             DispatchQueue.main.async {
@@ -35,7 +38,8 @@ class PostListTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
         
-
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         postController.fetchPosts {
             self.reloadTableView()
         }
@@ -46,7 +50,9 @@ class PostListTableViewController: UITableViewController {
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
+    
             // Turn off activity spinner?
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
         
     }
@@ -59,7 +65,7 @@ class PostListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
 
         let post = postController.posts[indexPath.row]
         

@@ -12,7 +12,7 @@ class PostController {
     
     // MARK: - Properties
     
-    static let baseURL = URL(string: "https://dm-post.firebaseio.com/posts")
+    static let baseURL = URL(string: "https://dm-post.firebaseio.com/posts/")
 
     var posts: [Post] = []
     
@@ -45,7 +45,7 @@ class PostController {
             do {
                 let decoder = JSONDecoder()
                 let postsDictionary = try decoder.decode([String:Post].self, from: data)
-                let posts: [Post] = postsDictionary.flatMap{ ($0.value) }
+                let posts: [Post] = postsDictionary.flatMap( {$0.value} )
                 let sortedPosts = posts.sorted(by: { $0.timestamp > $1.timestamp })
                 
                 if reset {
