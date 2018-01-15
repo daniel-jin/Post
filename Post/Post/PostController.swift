@@ -44,7 +44,7 @@ class PostController {
             
             do {
                 let decoder = JSONDecoder()
-                let postsDictionary = try decoder.decode([String:Post].self, from: data)
+                let postsDictionary = try decoder.decode([String:Post].self, from: data) // FIXME: Decoding error
                 let posts: [Post] = postsDictionary.flatMap( {$0.value} )
                 let sortedPosts = posts.sorted(by: { $0.timestamp > $1.timestamp })
                 
